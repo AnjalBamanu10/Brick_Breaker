@@ -18,6 +18,7 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
     private int ballXdir = -1;
     private int ballYdir = -2;
     private int playerX = 20;
+    private MapGenerator map;
 
     public GamePlay() {
         addKeyListener(this);
@@ -26,6 +27,8 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
 
         timer = new Timer(delay, this);
         timer.start();
+
+        map=new MapGenerator(3,7);
     }
     public void paint(Graphics graphics){
         //background
@@ -41,6 +44,9 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
         //paddle
         graphics.setColor(Color.green);
         graphics.fillRect(playerX,550,100,8);
+
+        //bricks
+        map.draw((Graphics2D)graphics);
 
         //ball
         graphics.setColor(Color.red);
@@ -95,6 +101,37 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
             if(ballRect.intersects(paddleRect)){
                 ballYdir =- ballYdir;
             }
+
+            A:for (int i = 0; i <map.map.length ; i++) {
+                for (int j = 0; j <map.map[0].length ; j++) {
+                    if (map.map[i][j]>0){
+                        int width=map.brickWidth;
+                        int height=map.brickHeight;
+                        int brickXpos=80+j*width;
+                        int brickYpos=50+i*height;
+
+                        Rectangle brickRect=new Rectangle(brickXpos,brickYpos,width,height);
+
+                        if (ballRect.intersects(brickRect)){
+                            map.setBrick(0, i, j);
+
+                            if(ballposX+19<=brickXpos || ballposX+1>=brickXpos+width){
+                                ballXdir=-ballXdir;
+                            }
+                            else {
+                                ballYdir=-ballYdir;
+                            }
+                            break A;
+
+
+                        }
+                    }
+                    
+                }
+                
+            }
+
+
             ballposX += ballXdir;
             ballposY += ballYdir;
         }
