@@ -10,8 +10,8 @@ public class MainClass {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-//        GamePlay gamePlay = new GamePlay();
-//        frame.add(gamePlay);
+        GamePlay gamePlay = new GamePlay();
+        frame.add(gamePlay);
         Background background= new Background();
         frame.add(background);
         frame.setVisible(true);

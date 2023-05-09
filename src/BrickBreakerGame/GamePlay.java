@@ -44,7 +44,7 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
         graphics.setColor(Color.yellow);
         graphics.fillRect(0,0,692,3);
         graphics.fillRect(0,3,3,592);
-        graphics.fillRect(691,3,3,592);
+        graphics.fillRect(681,3,3,592);
 
         //paddle
         graphics.setColor(Color.green);
@@ -68,12 +68,13 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
             ballXdir=0;
             ballYdir=0;
 
-            graphics.setColor(Color.green);
+            graphics.setColor(Color.red);
             graphics.setFont(new Font("serif",Font.BOLD,30));
-            graphics.drawString("GAME OVER!,Score: "+score,200,300);
+            graphics.drawString("GAME OVER!! Score: "+score,200,300);
 
-            graphics.setFont(new Font("serif",Font.BOLD,25));
-            graphics.drawString("Press Enter to Restart the Game!",230,35);
+            graphics.setColor(Color.green);
+            graphics.setFont(new Font("serif",Font.BOLD,20));
+            graphics.drawString("Press SPACE to Restart the Game!",220,350);
         }
 
         if(totalBrick<=0){
@@ -86,7 +87,7 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
             graphics.drawString("YOU WON!!,Score: "+score,200,300);
 
             graphics.setFont(new Font("serif",Font.BOLD,25));
-            graphics.drawString("Press Enter to Restart the Game!",230,35);
+            graphics.drawString("Press SPACE to Restart the Game!",400,350);
 
         }
 
@@ -102,6 +103,7 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
         play = true;
         playerX+=20;
     }
+
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_LEFT){
@@ -117,21 +119,30 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
             }else{
                 moveRight();
             }
-            if(e.getKeyCode()==KeyEvent.VK_ENTER){
-                if(!play){
-                    score=0;
-                    totalBrick=21;
-                    ballposX=120;
-                    ballposY=350;
-                    ballXdir=-1;
-                    ballYdir=-2;
-                    playerX=320;
 
-                    map= new MapGenerator(3,7);
-                }
-            }
         }
         repaint();
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            if(!play){
+                play = true;
+                score = 0;
+                totalBrick = 21;
+                ballposX = 120;
+                ballposY = 350;
+                ballXdir = -1;
+                ballYdir = -2;
+                playerX = 320;
+                map = new MapGenerator(3, 7);
+                repaint();
+                timer.start();
+            }
+            else{
+                timer.stop();
+                play = false;
+                JOptionPane.showMessageDialog(this, "Game paused. Press OK to resume.");
+                timer.start();
+            }
+        }
 
     }
     @Override
