@@ -56,7 +56,6 @@ public class Background extends JPanel implements ActionListener  {
         }
         else if (e.getSource()==exitButton) {
             System.exit(0);
-
         }
     }
 }
