@@ -175,7 +175,9 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
                         int brickYpos=50+i*height;
 
                         Rectangle brickRect = new Rectangle(brickXpos,brickYpos,width,height);
+
                         if(ballRect.intersects(brickRect)){
+                            Sound.playSound("brick_sound.wav");
                             map.setBrick(0,i,j);
                             totalBrick--;
                             score+=5;
