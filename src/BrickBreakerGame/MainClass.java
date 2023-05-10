@@ -13,6 +13,7 @@ public class MainClass {
 //        GamePlay gamePlay = new GamePlay();
 //        frame.add(gamePlay);
         Background background= new Background();
+
         frame.add(background);
         frame.setVisible(true);
 

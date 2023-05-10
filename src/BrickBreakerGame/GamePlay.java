@@ -73,7 +73,7 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
             graphics.drawString("GAME OVER!,Score: "+score,200,300);
 
             graphics.setFont(new Font("serif",Font.BOLD,25));
-            graphics.drawString("Press Enter to Restart the Game!",230,35);
+            graphics.drawString("Press Enter to Restart the Game!",230,350);
         }
 
         if(totalBrick<=0){
@@ -86,12 +86,10 @@ public class GamePlay  extends JPanel implements ActionListener, KeyListener {
             graphics.drawString("YOU WON!!,Score: "+score,200,300);
 
             graphics.setFont(new Font("serif",Font.BOLD,25));
-            graphics.drawString("Press Enter to Restart the Game!",230,35);
+            graphics.drawString("Press Enter to Restart the Game!",230,350);
+            GameOverPanel game = new GameOverPanel();
 
         }
-
-
-
     }
 
     private void moveLeft(){
